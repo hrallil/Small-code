@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1643799501 source:c:\users\mathi\onedrive\documents\kattis\n-sum\main.c
+	<stdio.h>
+	<stdlib.h>
+
