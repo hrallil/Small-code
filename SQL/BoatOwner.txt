@@ -1,0 +1,73 @@
+create table owner(
+	name text primary key,
+	membership integer
+);
+
+create table boat(
+	name text primary key,
+	owner integer references owner(membership),
+	length integer
+);
+
+insert into owner values ('Mads','101');
+insert into owner values ('Carl','102');
+insert into owner values ('Frederik','103');
+
+insert into owner values ('Dannebrog','101', 78);
+insert into owner values ('Mads",'101', 311);
+insert into owner values ('Mads",'102', 269);
+insert into owner values ('Mads",'NULL',45);
+
+
+.mode columns
+select * from boat;
+
+.q
+
+--doing--
+
+-- Find owners that have boats of length bigger than 200
+
+select owner.name, max(boat.length)
+	from owner inner join boat
+	on owner.membership = boat.owner
+	where boat.length >= 75
+	group by owner.name
+;
+
+select distinct owner.name
+	from owner inner join boat
+	on owner.membership = boat.owner
+	where boat.length >= 75
+:
+
+
+
+
+-- DONE--
+
+--Find boats with no owners 
+select name from boat where owner is null;
+
+--Find owners with no boats
+select owner.name, count(boat.name) as boats
+	from owner left join boat
+	on owner.membership = boat.owner
+	-- where boat.owner is null
+	group by owner.name
+	having boats = 0
+	;
+
+--Find owners with more than one boat
+select owner.name, count(boat.name) as boats
+	from owner left join boat
+	on owner.membership = boat.owner
+	-- where boat.owner is null
+	group by owner.name
+	having boats > 1
+	;
+
+
+select * from boat;
+
+.quit

@@ -1,0 +1,18 @@
+----- background ------
+
+
+In this first study, the focus is on one sorting algorithm, 
+later other sorting and seartch alogirthms will be investigated. 
+
+
+----- aims/pupose ------
+
+Heapsort can be described with the time complexity of O(n*log(n)),
+which is a well understood and predictable complexity. 
+The algorithm also runs in asymptotic time complexity, 
+making the complexity independant of input and other potentially dynamic data.
+Heapsort also allows for certain degrees of paralleling in the implimentation, 
+allowing for the investigation of the effects paralel programming
+can have on resource and energy consumtion. Finally, the implimentation of Heapsort 
+does not require more than a constant memory complexity, removing any redundant energy use.
+

@@ -1,0 +1,27 @@
+ ----- Aims/Purpose -----
+
+heap-sort time complexety er n*log(n), hvilket er en velbekendt komplexitet
+	Og har en forventet kører tid og forudsigelig. 
+
+kører tid er af asymtotisk komplexitet -> ikke afhænger af data. 
+	ikke benytter extra dynamisk data undervejs ved sortering. 
+
+giver mulighed for en passende grad for parallelysering under sortering med effekten af  
+
+algoritmen giver muliughed for grader af parallelysering under implementationedn af heapefyeren, derfor giver det også mulighed undersøge betydningen af paralelysering for resurce forbrug af algoritmen. 
+
+
+
+Hukkommelses forbruget af heap-sort er ikke. 
+
+
+ ----- background ----- 
+
+tilføj noget om at heapsort ikke er det eneste. 
+noget om andre typer af algoritmer, noget shortest path (måske noget om search vs sort)
+
+
+
+
+
+

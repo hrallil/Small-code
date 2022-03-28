@@ -11,30 +11,27 @@ class App{
             conn = DriverManager.getConnection(url);
             System.out.println("got it!");
 
-            Statement stmt = null;
-            String query = "select * from dummyTbl;";
-            try {
-                stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(query);
-                while (rs.next()) {
-                    String name = rs.getString("name");
-                    System.out.println(name);                    
-                }
-            } catch (SQLException e) {
-                throw new Error("problem",e);
-            }finally{
-                if(stmt != null){
-                    stmt.close();
-                }
+            Statement stmt = conn.createStatement();
+            //stmt.executeUpdate("create table tbl1 (name text, age integer);");
+            stmt.executeUpdate("insert into tbl1 values ('rasmus', 23);");
+
+            ResultSet rs = stmt.executeQuery("select * from tbl1;");
+            while (rs.next()) {
+                System.out.println(rs.getString("name") + " " + rs.getString("age"));
             }
-        } catch (Exception e) {
+            
+            
+        } 
+        catch (Exception e) {
             throw new Error("Problem", e);
-        } finally {
+        } 
+        finally {
             try {
                 if (conn != null){
                     conn.close();
                 }
-            } catch (SQLException ex) {
+            } 
+            catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
         }
