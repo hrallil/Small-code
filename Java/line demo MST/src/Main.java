@@ -1,22 +1,15 @@
 public class Main {
 
     public static void main(String[] args) {
-        MatrixGraph directedG=createDirected();
+        MatrixGraph directedG = createDirected();
         directedG.PrintGraph();
-        directedG.primMST();
-        directedG.PrintGraph();
-        /*
-        AdjacencyGraph adjDirectedG=createDirectedAdj();
-        adjDirectedG.PrintGraph();
-        */
-
-
-
-
-	
+        directedG.PrimsMST();
+        //AdjacencyGraph adjDirectedG=createDirectedAdj();
+        //adjDirectedG.PrintGraph();
+	// write your code here
     }
     public static MatrixGraph createDirected(){
-        MatrixGraph newG=new MatrixGraph(7);
+        MatrixGraph newG = new MatrixGraph(7);
         newG.addEdge(0,1,1);
         newG.addEdge(0,2,5);
         newG.addEdge(0,4,3);

@@ -2,71 +2,87 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MatrixGraph {
-    boolean[][] edgeMatrix;
-    int[][]  weightMatrix;
+    boolean[][] EdgeMatrix;
+    int[][]  WeightMatrix;
     public MatrixGraph(int Vertices){
-        edgeMatrix=new boolean[Vertices][Vertices];
+        EdgeMatrix=new boolean[Vertices][Vertices];
         for(int i=0;i<Vertices;i++)
-            Arrays.fill(edgeMatrix[i],false);
-        weightMatrix=new int[Vertices][Vertices];
+            Arrays.fill(EdgeMatrix[i],false);
+        WeightMatrix=new int[Vertices][Vertices];
         for(int i=0;i<Vertices;i++)
-            Arrays.fill(weightMatrix[i],-1);
+            Arrays.fill(WeightMatrix[i],-1);
     }
     public void addEdge(int from,int to, int weight){
-        edgeMatrix[from][to]=true;
-        weightMatrix[from][to]=weight;
+        EdgeMatrix[from][to]=true;
+        WeightMatrix[from][to]=weight;
     }
 
     public void addUnDirectedEdge(int from,int to, int weight){
-        edgeMatrix[from][to]=true;
-        weightMatrix[from][to]=weight;
-        edgeMatrix[to][from]=true;
-        weightMatrix[to][from]=weight;
+        EdgeMatrix[from][to]=true;
+        WeightMatrix[from][to]=weight;
+        EdgeMatrix[to][from]=true;
+        WeightMatrix[to][from]=weight;
     }
     public void PrintGraph(){
-        for(int i =0; i<edgeMatrix.length;i++) {
+        for(int i =0; i<EdgeMatrix.length;i++) {
             System.out.println(" Vertex " + i + " is connect to : ");
-            for (int j=0;j<edgeMatrix.length;j++){
-                if(edgeMatrix[i][j])
-                    System.out.println(j+" with weight: "+ weightMatrix[i][j]);
+            for (int j=0;j<EdgeMatrix.length;j++){
+                if(EdgeMatrix[i][j])
+                    System.out.println(j+" with weight: "+ WeightMatrix[i][j]);
             }
         }
     }
-
-    public void primMST(){
-        Integer[] dist = new Integer[edgeMatrix.length];
-        Integer[] prev = new Integer[edgeMatrix.length];
-        boolean[] visited = new boolean[edgeMatrix.length];
-        MinHeap<Pair> q = new MinHeap<Pair>();
-        ArrayList<Pair> vertexPairs = new ArrayList<Pair>();
-        Arrays.fill(dist, Integer.MAX_VALUE);
-        Arrays.fill(prev, -1);
-        Arrays.fill(visited, false);
-        if(edgeMatrix.length > 0){
-            dist[0] = 0;
-            prev[0] = 0;
+    public void PrimsMST(){
+        Integer[] Dist =new Integer[EdgeMatrix.length];
+        Integer[] Prev = new Integer[EdgeMatrix.length];
+        boolean[] visited=new boolean[EdgeMatrix.length];
+        MinHeap<Pair> Q=new MinHeap<Pair>();
+        ArrayList<Pair> VertexPairs=new ArrayList<>();
+        Arrays.fill(Dist,Integer.MAX_VALUE);
+        Arrays.fill(Prev,-1);
+        Arrays.fill(visited,false);
+        if (EdgeMatrix.length>0){
+            Dist[0]=0;
+            Prev[0]=0;
         }
-        for (int i = 0; i < edgeMatrix.length; i++) {
-            vertexPairs.add(new Pair(dist[i],i));
-            q.Insert(vertexPairs.get(i));
+        for(int i = 0; i<EdgeMatrix.length;i++) {
+            Pair newPair= new Pair(Dist[i], i);
+            VertexPairs.add(newPair);
+            Q.Insert(newPair);
         }
-        int lengthOfMST = 0;
-
-        while (!q.isEmpty()) {
-            Pair u = q.extractMin();
-            for (int v = 0; v < edgeMatrix[u.index].length; v++) {
-                if (edgeMatrix[u.index][v] && weightMatrix[u.index][v] < dist[v] && !visited[v]) {
-                    vertexPairs.get(v).distance = weightMatrix[u.index][v];
-                    dist[v] = weightMatrix[u.index][v];
-
-                    prev[v] = u.index;
-                    int pos = q.getPosition(vertexPairs.get(v));
-                    q.decreasekey(pos);
+        int MST=0;
+        while(!Q.isEmpty()){
+            Pair u=Q.extractMin();
+            for(int v=0; v< EdgeMatrix[u.index].length;v++)
+            {
+                if(EdgeMatrix[u.index][v] && WeightMatrix[u.index][v]<Dist[v]  && !visited[v]){
+                    Dist[v]= WeightMatrix[u.index][v];
+                    VertexPairs.get(v).dist=WeightMatrix[u.index][v];
+                    Prev[v]=u.index;
+                    int pos=Q.getPosition(VertexPairs.get(v));
+                    Q.decreasekey(pos);
                 }
             }
-            visited[u.index] = true;
-            lengthOfMST += dist[u.index];
+            visited[u.index]=true;
+            MST+=Dist[u.index];
         }
-        System.out.println("Minimum spanning tree is " + lengthOfMST + " long");
+        System.out.println(" Minimum spanning tree distance: "+ MST);
+        for(int i=0;i< EdgeMatrix.length;i++){
+            System.out.println(" parent "+ Prev[i]+ " to "+ i + " Edge Weight "+Dist[i]);
+        }
+    }
+}
+
+class Pair implements Comparable<Pair>{
+    Integer dist;
+    Integer index;
+    public  Pair(Integer dist, Integer i){
+        this.dist=dist;
+        this.index=i;
+    }
+
+    @Override
+    public int compareTo(Pair o) {
+        return this.dist.compareTo((o.dist));
     }
 }

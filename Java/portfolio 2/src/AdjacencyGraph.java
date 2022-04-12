@@ -33,7 +33,11 @@ public class AdjacencyGraph {
             System.out.println("");
         }
     }
+    public void primMST() {
+        
+    }
 
+    /*
     public void primMST() {
         Integer[] d = new Integer[Vertecies.size()];
         Vertex[] p = new Vertex[Vertecies.size()];
@@ -60,10 +64,13 @@ public class AdjacencyGraph {
             }
             pair.previous.visited = true;
         }
+        System.out.println("MST vertecies: ");
         for (int i = 0; i < p.length; i++) {
-            if(p[i] != null){
-                System.out.println(p[i].getName() + " " + d[i]);
+            if (p[i] != null) {
+                System.out.println("city: " + p[i].name + " to " + i + " has distance " + d[i]);
             }
         }
+       
     }
+    */
 }

@@ -1,7 +1,7 @@
 public class App {
     public static void main(String[] args) throws Exception {
         AdjacencyGraph electricalGrid = makeElectricGridGraph();
-        //electricalGrid.printGraph();
+        electricalGrid.printGraph();
         electricalGrid.primMST();
 
     }
